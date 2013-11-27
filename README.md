@@ -1,1 +1,1 @@
-A simple vagrant setup for a Debian 7 web server.
+A simple base box for a debian 7 webserver
