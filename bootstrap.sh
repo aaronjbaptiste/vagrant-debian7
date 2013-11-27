@@ -14,9 +14,15 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 
 echo "-- Installing apache"
-sudo apt-get install -y apache2
-a2enmod rewrite
-sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+sudo apt-get install -y apache2 apache2-mpm-prefork
+sudo a2enmod rewrite
+sudo a2enmod deflate
+sudo a2enmod php5
+sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
+echo "-- Setting document root"
+sudo rm -rf /var/www
+sudo ln -fs /vagrant/public /var/www
 
 echo "-- Installing the latest php 5.5"
 cat << EOF | sudo tee -a /etc/apt/sources.list
@@ -31,7 +37,7 @@ sudo apt-key add dotdeb.gpg
 
 sudo apt-get update
 
-sudo apt-get install -y php5 libapache2-mod-php5 php5-mysql php5-mcrypt php5-curl php5-cli php5-gd
+sudo apt-get install -y php5 php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
