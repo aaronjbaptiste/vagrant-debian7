@@ -1,0 +1,1 @@
+A simple vagrant setup for a Debian 7 web server.
