@@ -29,8 +29,6 @@ deb http://packages.dotdeb.org wheezy-php55 all
 deb-src http://packages.dotdeb.org wheezy-php55 all
 EOF
 
-sudo a2enmod php5
-
 sudo apt-get update
 
 wget http://www.dotdeb.org/dotdeb.gpg
@@ -39,6 +37,8 @@ sudo apt-key add dotdeb.gpg
 sudo apt-get update
 
 sudo apt-get install -y php5 php5-mysql php5-mcrypt php5-curl php5-gd libapache2-mod-php5
+
+sudo a2enmod php5
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
