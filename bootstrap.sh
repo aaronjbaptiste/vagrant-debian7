@@ -4,7 +4,6 @@ echo "-- Starting the install process"
 
 echo "-- Update Packages"
 sudo apt-get update
-sudo apt-get upgrade
 
 echo "-- Installing basic tools, like vim"
 sudo apt-get install -y vim curl wget git
@@ -17,7 +16,6 @@ echo "-- Installing apache"
 sudo apt-get install -y apache2 apache2-mpm-prefork
 sudo a2enmod rewrite
 sudo a2enmod deflate
-sudo a2enmod php5
 sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 echo "-- Setting document root"
@@ -30,6 +28,8 @@ cat << EOF | sudo tee -a /etc/apt/sources.list
 deb http://packages.dotdeb.org wheezy-php55 all
 deb-src http://packages.dotdeb.org wheezy-php55 all
 EOF
+
+sudo a2enmod php5
 
 sudo apt-get update
 
