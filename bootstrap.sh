@@ -21,6 +21,7 @@ sudo a2enmod php5
 sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 echo "-- Setting document root"
+mkdir /vagrant/public
 sudo rm -rf /var/www
 sudo ln -fs /vagrant/public /var/www
 
